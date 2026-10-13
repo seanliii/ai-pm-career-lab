@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 产品经理求职军备库 · 8家顶级公司招聘要求全景</title>
+<style>
+  :root {
+    --bg: #faf9f7;
+    --paper: #ffffff;
+    --ink: #1a1a1a;
+    --ink-2: #4a4a4a;
+    --ink-3: #8a8a8a;
+    --line: #e8e5e0;
+    --accent: #7c5cff;
+    --accent-soft: #f0ecff;
+    --red: #d64545;
+    --amber: #b8860b;
+    --green: #2e7d4f;
+    --serif: "Songti SC", "Noto Serif SC", "STSong", serif;
+    --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--sans); font-size: 15px; line-height: 1.75;
+  }
+  /* ===== 顶部 ===== */
+  .masthead {
+    background: var(--ink); color: #fff;
+    padding: 56px 0 48px; position: relative; overflow: hidden;
+  }
+  .masthead::after {
+    content:""; position:absolute; right:-80px; top:-80px; width:340px; height:340px;
+    border-radius:50%; background:radial-gradient(circle, rgba(124,92,255,.35), transparent 70%);
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .kicker {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 3px;
+    color: #a99fff; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .masthead h1 {
+    font-family: var(--serif); font-size: 42px; font-weight: 700;
+    line-height: 1.25; margin-bottom: 14px;
+  }
+  .masthead p.sub { color: #c8c8c8; font-size: 15px; max-width: 680px; }
+  .stats { display:flex; gap:40px; margin-top: 32px; flex-wrap:wrap; }
+  .stat b { display:block; font-size: 32px; font-family: var(--serif); color:#fff; }
+  .stat span { font-size: 12.5px; color:#9a9a9a; }
+  /* ===== 导航 ===== */
+  nav {
+    position: sticky; top:0; z-index: 100;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    display:flex; max-width:1180px; margin:0 auto; padding: 0 32px;
+    overflow-x: auto; gap: 2px;
+  }
+  nav a {
+    padding: 13px 16px; font-size: 13.5px; color: var(--ink-2);
+    text-decoration: none; white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: all .15s;
+  }
+  nav a:hover, nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+  /* ===== 章节 ===== */
+  section { padding: 56px 0 24px; }
+  h2.sec {
+    font-family: var(--serif); font-size: 28px; font-weight: 700;
+    margin-bottom: 6px; display:flex; align-items:baseline; gap: 12px;
+  }
+  h2.sec .no { font-family: var(--mono); font-size: 13px; color: var(--accent); letter-spacing: 2px; }
+  p.sec-sub { color: var(--ink-3); font-size: 13.5px; margin-bottom: 28px; }
+
+  /* ===== JD 卡片 ===== */
+  .company-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
+  @media (max-width: 900px) { .company-grid { grid-template-columns: repeat(2,1fr);} }
+  .company-card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 18px 16px; cursor: pointer; transition: all .18s;
+    position: relative; overflow:hidden;
+  }
+  .company-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.08); border-color: var(--c-accent); }
+  .company-card.active { border-color: var(--c-accent); box-shadow: 0 0 0 1px var(--c-accent); }
+  .company-card .bar { position:absolute; top:0; left:0; right:0; height:3px; background: var(--c-accent); }
+  .company-card h3 { font-size: 16px; margin-bottom: 4px; }
+  .company-card .cnt { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .company-card .src { font-size: 11px; color: var(--ink-3); margin-top: 8px; line-height: 1.5; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+  .job-list { display:flex; flex-direction:column; gap: 12px; }
+  .job {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    overflow: hidden;
+  }
+  .job-head {
+    padding: 16px 22px; display:flex; align-items:center; gap: 12px; cursor:pointer;
+    user-select:none;
+  }
+  .job-head:hover { background: #fbfaff; }
+  .job-head .t { font-weight: 600; font-size: 15.5px; flex: 1; }
+  .job-head .meta { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); white-space:nowrap; }
+  .job-head .chev { color: var(--ink-3); transition: transform .2s; font-size: 12px; }
+  .job.open .chev { transform: rotate(90deg); }
+  .tag-urgent {
+    background: #fdeaea; color: var(--red); font-size: 11px; font-weight:600;
+    padding: 2px 8px; border-radius: 99px; white-space:nowrap;
+  }
+  .job-body { display:none; padding: 4px 22px 22px; border-top: 1px dashed var(--line); }
+  .job.open .job-body { display:block; }
+  .job-body h4 {
+    font-size: 12px; letter-spacing: 2px; color: var(--c-accent, var(--accent));
+    margin: 18px 0 10px; font-weight: 700;
+  }
+  .job-body ul { padding-left: 0; list-style: none; }
+  .job-body li {
+    padding-left: 18px; position: relative; margin-bottom: 7px; font-size: 14px; color: var(--ink-2);
+  }
+  .job-body li::before { content:"▸"; position:absolute; left:2px; color: var(--c-accent, var(--accent)); font-size: 11px; top: 2px; }
+  .job-body .note {
+    background: var(--accent-soft); border-radius: 8px; padding: 12px 16px;
+    font-size: 13.5px; color: var(--ink-2); margin-top: 16px;
+  }
+  .job-body .salary { font-family: var(--mono); font-size: 12px; color: var(--green); }
+
+  /* ===== 能力矩阵 ===== */
+  .matrix { display:flex; flex-direction:column; gap: 10px; }
+  .cap {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 22px;
+  }
+  .cap-head { display:flex; align-items:baseline; gap: 12px; flex-wrap:wrap; margin-bottom: 8px; }
+  .cap-head .nm { font-weight: 700; font-size: 15.5px; }
+  .cap-head .wt { font-family: var(--mono); font-size: 11.5px; color: var(--red); }
+  .cap .dt { font-size: 13.5px; color: var(--ink-2); margin-bottom: 10px; }
+  .cap .ad {
+    background: #f4faf6; border-left: 3px solid var(--green);
+    padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 13.5px;
+  }
+  .cap .ad b { color: var(--green); }
+
+  /* ===== 清单/学习路径 ===== */
+  .two-col { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 22px;
+  }
+  .panel h3 { font-family: var(--serif); font-size: 18px; margin-bottom: 14px; }
+  .panel .grp { margin-bottom: 16px; }
+  .panel .grp > b { display:block; font-size: 13.5px; margin-bottom: 8px; color: var(--accent); }
+  .panel .grp ul { list-style:none; padding:0; }
+  .panel .grp li { padding-left: 16px; position:relative; font-size: 13.5px; color: var(--ink-2); margin-bottom: 5px; }
+  .panel .grp li::before { content:"✓"; position:absolute; left:0; color: var(--green); font-size: 11px; top: 2px; }
+
+  .stage {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 20px 22px; margin-bottom: 14px;
+  }
+  .stage-head { display:flex; align-items:baseline; gap: 12px; margin-bottom: 4px; flex-wrap:wrap; }
+  .stage-head .st { font-weight: 700; font-size: 16px; }
+  .stage-head .gl { font-size: 13px; color: var(--ink-3); }
+  .stage table { width:100%; border-collapse: collapse; margin-top: 12px; }
+  .stage th {
+    text-align:left; font-size: 11.5px; color: var(--ink-3); font-weight:600;
+    padding: 6px 10px; border-bottom: 1px solid var(--line); letter-spacing: 1px;
+  }
+  .stage td { padding: 10px; border-bottom: 1px solid #f2f0ec; font-size: 13.5px; vertical-align: top; }
+  .stage td:first-child { font-weight: 600; width: 24%; }
+  .stage td.mid { color: var(--ink-2); width: 42%; }
+
+  /* ===== 面试题 ===== */
+  .qcat { margin-bottom: 26px; }
+  .qcat-head {
+    display:flex; align-items:center; gap: 12px; margin-bottom: 14px;
+  }
+  .qcat-head .nm { font-family: var(--serif); font-size: 19px; font-weight: 700; }
+  .lv {
+    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px;
+    background: #fdeaea; color: var(--red);
+  }
+  .lv.mid { background: #fff6e0; color: var(--amber); }
+  .q {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 18px 22px; margin-bottom: 10px;
+  }
+  .q .qq { font-weight: 600; font-size: 14.5px; margin-bottom: 10px; }
+  .q .qq .qn { font-family: var(--mono); color: var(--accent); font-size: 12px; margin-right: 6px; }
+  .q .key {
+    background: #f8f7ff; border-left: 3px solid var(--accent);
+    padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 13px; color: var(--ink-2);
+  }
+  .q .key b { color: var(--accent); }
+
+  /* ===== 笔试 ===== */
+  .exam {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 22px; margin-bottom: 16px;
+  }
+  .exam h3 { font-family: var(--serif); font-size: 18px; margin-bottom: 6px; }
+  .exam .sc { font-size: 13px; color: var(--ink-2); background: #f4faf6; border-left: 3px solid var(--green); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-top: 12px; }
+  .exam ol { padding-left: 22px; margin: 10px 0; }
+  .exam ol li { font-size: 14px; color: var(--ink-2); margin-bottom: 6px; }
+
+  /* ===== 参考答案 ===== */
+  .ans-body {
+    background: #fbfaff; border-left: 3px solid var(--accent);
+    padding: 14px 18px; border-radius: 0 8px 8px 0; font-size: 13.5px;
+    color: var(--ink-2); white-space: pre-wrap; line-height: 1.9;
+  }
+
+  /* ===== 项目指南 ===== */
+  .guide {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 24px; margin-bottom: 18px;
+  }
+  .guide h3 { font-family: var(--serif); font-size: 19px; margin-bottom: 4px; }
+  .guide .gtime { font-family: var(--mono); font-size: 12px; color: var(--accent); margin-bottom: 10px; }
+  .guide .gwhy {
+    font-size: 13.5px; color: var(--ink-2); background: var(--accent-soft);
+    padding: 10px 14px; border-radius: 8px; margin-bottom: 16px;
+  }
+  .guide table { width:100%; border-collapse: collapse; }
+  .guide th {
+    text-align:left; font-size: 11.5px; color: var(--ink-3); font-weight:600;
+    padding: 6px 10px; border-bottom: 1px solid var(--line); letter-spacing: 1px;
+  }
+  .guide td { padding: 10px; border-bottom: 1px solid #f2f0ec; font-size: 13.5px; vertical-align: top; }
+  .guide td.st { font-weight: 600; width: 26%; color: var(--ink); }
+  .guide .rl {
+    margin-top: 14px; background: #f4faf6; border-left: 3px solid var(--green);
+    padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 13px; color: var(--ink-2);
+  }
+  .guide .rl b { color: var(--green); }
+
+  /* ===== 资源 ===== */
+  .res-grp { margin-bottom: 24px; }
+  .res-grp > h3 { font-family: var(--serif); font-size: 18px; margin-bottom: 12px; }
+  .res {
+    display:block; background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 20px; margin-bottom: 8px; text-decoration: none; transition: all .15s;
+  }
+  .res:hover { border-color: var(--accent); transform: translateX(3px); }
+  .res .rn { font-weight: 600; font-size: 14px; color: var(--ink); }
+  .res .rw { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+  .res .u { font-family: var(--mono); font-size: 11px; color: var(--accent); word-break: break-all; }
+
+  /* ===== 作品集结构 ===== */
+  .tree {
+    font-family: var(--mono); background: #1e1e2e; color: #cdd6f4;
+    border-radius: 10px; padding: 22px 26px; font-size: 13px; line-height: 2;
+    overflow-x: auto; margin-bottom: 16px;
+  }
+  .tree .dir { color: #89b4fa; font-weight: 700; }
+  .tree .cmt { color: #6c7086; }
+  .principles li {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 8px;
+    padding: 12px 18px; margin-bottom: 8px; font-size: 14px; list-style: none; position:relative; padding-left: 40px;
+  }
+  .principles li::before { content:"◆"; position:absolute; left: 16px; color: var(--accent); font-size: 11px; top: 14px; }
+
+  /* ===== 分公司建议 ===== */
+  .focus-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 900px) { .focus-grid { grid-template-columns: 1fr; } }
+  .fc {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px;
+  }
+  .fc b.co { display:block; font-size: 14.5px; margin-bottom: 6px; color: var(--ink); }
+  .fc p { font-size: 13.5px; color: var(--ink-2); }
+
+  /* ===== 简历校准器 ===== */
+  .cal-wrap { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 980px) { .cal-wrap { grid-template-columns: 1fr; } }
+  .cal-input, .cal-output {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 20px;
+  }
+  .cal-input h3, .cal-output h3 { font-family: var(--serif); font-size: 17px; margin-bottom: 12px; }
+  .cal-input textarea {
+    width:100%; height: 340px; border:1px solid var(--line); border-radius: 8px; padding: 14px;
+    font-size: 13px; line-height: 1.7; font-family: var(--sans); resize: vertical; background: #fcfcfb;
+  }
+  .cal-input textarea:focus { outline: 2px solid var(--accent-soft); border-color: var(--accent); }
+  .cal-actions { display:flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    background: var(--ink); color: #fff; border: none; border-radius: 8px;
+    padding: 10px 22px; font-size: 14px; cursor: pointer; font-family: var(--sans);
+  }
+  .btn:hover { background: var(--accent); }
+  .btn.ghost { background: transparent; color: var(--ink-2); border: 1px solid var(--line); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); background: transparent; }
+  .cal-note { font-size: 12px; color: var(--ink-3); margin-top: 10px; line-height: 1.6; }
+  .score-row {
+    display:flex; align-items:flex-start; gap: 10px; padding: 10px 12px;
+    border-bottom: 1px solid #f2f0ec; font-size: 13.5px;
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-badge {
+    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 99px; white-space: nowrap; margin-top: 1px;
+  }
+  .sb-yes { background:#e6f5ec; color: var(--green); }
+  .sb-mid { background:#fff6e0; color: var(--amber); }
+  .sb-no  { background:#fdeaea; color: var(--red); }
+  .score-row .nm { font-weight: 600; }
+  .score-row .hint { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+  .cal-summary {
+    display:flex; gap: 16px; margin: 14px 0; flex-wrap: wrap;
+  }
+  .cal-summary .pill {
+    background: var(--accent-soft); border-radius: 8px; padding: 8px 14px; font-size: 13px;
+  }
+  .cal-summary .pill b { font-size: 16px; }
+  .gaps-box {
+    background: #fff9e8; border: 1px solid #f0dfa8; border-radius: 8px;
+    padding: 12px 16px; font-size: 13px; color: #6b5a1e; margin-top: 12px;
+  }
+  .empty-state { color: var(--ink-3); font-size: 13.5px; padding: 40px 20px; text-align: center; }
+
+  footer {
+    margin-top: 60px; background: var(--ink); color: #888;
+    padding: 32px 0; font-size: 12.5px; text-align:center;
+  }
+  footer .wrap { max-width: 1180px; }
+  .disclaimer {
+    background: #fff9e8; border: 1px solid #f0dfa8; border-radius: 8px;
+    padding: 10px 16px; font-size: 12.5px; color: #7a6520; margin-top: 20px;
+  }
+  /* 打印优化 */
+  @media print {
+    nav { display:none; }
+    .job-body { display:block !important; }
+    .company-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="kicker">AI PM CAREER LAB · 2026.10</div>
+    <h1>AI 产品经理求职军备库<br>八家顶级公司招聘要求全景 × 备战指南</h1>
+    <p class="sub">基于 2026-10-13 从各家官方招聘渠道真实抓取的 JD 汇总:岗位要求、能力矩阵、简历清单、学习路径、面试题库、笔试题、深入资料、作品集结构。持续上传简历可反复校准。</p>
+    <div class="stats">
+      <div class="stat"><b id="st-companies">8</b><span>家公司</span></div>
+      <div class="stat"><b id="st-jobs">0</b><span>个 AI 产品经理岗位</span></div>
+      <div class="stat"><b>11</b><span>项核心能力矩阵</span></div>
+      <div class="stat"><b>16</b><span>道面试真题</span></div>
+      <div class="stat"><b>3</b><span>套笔试题</span></div>
+      <div class="stat"><b>11</b><span>项简历校准检测</span></div>
+    </div>
+  </div>
+</header>
+
+<nav id="nav">
+  <a href="#sec-jd" class="active">① 招聘要求汇总</a>
+  <a href="#sec-matrix">② 能力矩阵</a>
+  <a href="#sec-resume">③ 简历该展示什么</a>
+  <a href="#sec-learn">④ 学习路径</a>
+  <a href="#sec-interview">⑤ 面试题库</a>
+  <a href="#sec-exam">⑥ 笔试题</a>
+  <a href="#sec-answers">⑥+ 参考答案</a>
+  <a href="#sec-guides">⑥++ 项目指南</a>
+  <a href="#sec-res">⑦ 资料与论文</a>
+  <a href="#sec-portfolio">⑧ GitHub 作品集</a>
+  <a href="#sec-focus">⑨ 简历重点</a>
+  <a href="#sec-calibrator">⑩ 简历校准器</a>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ ① JD 汇总 ============ -->
+<section id="sec-jd">
+  <h2 class="sec"><span class="no">01</span>八家招聘要求汇总</h2>
+  <p class="sec-sub" id="jd-sub">点击公司卡片切换 · 点击岗位展开完整职责与要求 · 标「急」为官方标注急聘</p>
+  <div class="company-grid" id="company-grid"></div>
+  <div class="job-list" id="job-list"></div>
+</section>
+
+<!-- ============ ② 能力矩阵 ============ -->
+<section id="sec-matrix">
+  <h2 class="sec"><span class="no">02</span>能力要求矩阵 · 8家 JD 横向提炼</h2>
+  <p class="sec-sub">按出现频率和权重排序——这 11 项就是 2026 年 AI 产品经理的真实门槛</p>
+  <div class="matrix" id="matrix"></div>
+</section>
+
+<!-- ============ ③ 简历清单 ============ -->
+<section id="sec-resume">
+  <h2 class="sec"><span class="no">03</span>简历需要对应展示什么</h2>
+  <p class="sec-sub">对照能力矩阵逐条翻译成简历语言</p>
+  <div class="panel" id="resume-checklist" style="max-width:860px"></div>
+</section>
+
+<!-- ============ ④ 学习路径 ============ -->
+<section id="sec-learn">
+  <h2 class="sec"><span class="no">04</span>需要学习的知识 · 四阶段路径</h2>
+  <p class="sec-sub">约 8-10 周:从「用过」到「拆过」再到「做过」</p>
+  <div id="learn-path"></div>
+</section>
+
+<!-- ============ ⑤ 面试题库 ============ -->
+<section id="sec-interview">
+  <h2 class="sec"><span class="no">05</span>面试题库 · 16 道高频真题</h2>
+  <p class="sec-sub">题目来源=各家 JD 原文考点 · 你上传简历后,我会按你的强弱项定制追问链</p>
+  <div id="interview"></div>
+</section>
+
+<!-- ============ ⑥ 笔试题 ============ -->
+<section id="sec-exam">
+  <h2 class="sec"><span class="no">06</span>笔试题 · 3 套实战</h2>
+  <p class="sec-sub">做完发给我,我按真实面试官标准评分并给修改意见</p>
+  <div id="exams"></div>
+</section>
+
+<!-- ============ ⑥.5 参考答案 ============ -->
+<section id="sec-answers">
+  <h2 class="sec"><span class="no">06+</span>16 道面试题 · 参考答案</h2>
+  <p class="sec-sub">点击题目展开答案 · 先自己答一遍再看——背答案和真懂,面试官三个追问就分辨出来</p>
+  <div class="job-list" id="answers"></div>
+</section>
+
+<!-- ============ ⑥.8 独立项目实操指南 ============ -->
+<section id="sec-guides">
+  <h2 class="sec"><span class="no">06++</span>独立项目 · 从零做出来实操指南</h2>
+  <p class="sec-sub">三个项目的分步路线图 · 简历上每个数字都从这些步骤里长出来</p>
+  <div id="guides"></div>
+</section>
+
+<!-- ============ ⑦ 资源 ============ -->
+<section id="sec-res">
+  <h2 class="sec"><span class="no">07</span>深入资料 · 论文 · 开源项目</h2>
+  <p class="sec-sub">只列「读了能直接改变面试表现」的,不堆量</p>
+  <div id="resources"></div>
+</section>
+
+<!-- ============ ⑧ 作品集 ============ -->
+<section id="sec-portfolio">
+  <h2 class="sec"><span class="no">08</span>GitHub 作品集 · 完整结构 + 启动包</h2>
+  <p class="sec-sub">Kimi AI Taste 岗原话:「作品集比简历更能代表你」· 启动包在 <code style="font-family:var(--mono);font-size:12px;background:#eee;padding:2px 6px;border-radius:4px">portfolio-starter/</code> 目录,12 个模板文件直接填空</p>
+  <div class="tree">
+<span class="dir">ai-pm-portfolio/</span>            <span class="cmt"># GitHub 个人主页置顶仓库</span>
+├── README.md                      <span class="cmt"># 你是谁/3句AI产品观/3个代表作+数据/联系方式</span>
+├── <span class="dir">01-agent-product/</span>        <span class="cmt"># 垂直领域 Agent 产品(代表作1)</span>
+│   ├── app/                       <span class="cmt"># 源码,部署到可访问 URL</span>
+│   ├── EVALUATION.md              <span class="cmt"># 50+ case 评测报告</span>
+│   └── POSTMORTEM.md              <span class="cmt"># 失败案例分析(诚实展示)</span>
+├── <span class="dir">02-eval-framework/</span>       <span class="cmt"># 评测体系(代表作2·最高频差异化要求)</span>
+│   ├── rubric.md                  <span class="cmt"># 「好」的定义:维度+1-5分锚点</span>
+│   ├── dataset/                   <span class="cmt"># 测试集 + 抽样方案</span>
+│   ├── judge/                     <span class="cmt"># LLM-as-a-Judge 实现+防偏差设计</span>
+│   └── REPORT.md                  <span class="cmt"># 基准对比报告</span>
+├── <span class="dir">03-product-teardowns/</span>    <span class="cmt"># 3-5篇产品深度拆解(附TEARDOWN-TEMPLATE.md五要素模板)</span>
+├── <span class="dir">04-prototypes/</span>           <span class="cmt"># vibe coding 原型集(每个:README+GIF+学习点;附5个由浅入深选题)</span>
+└── <span class="dir">05-writing/</span>              <span class="cmt"># 观点文章:交互范式/能力边界/领域判断(附文章模板)</span>
+  </div>
+  <div style="background:var(--accent-soft);border:1px solid #ddd6ff;border-radius:10px;padding:18px 22px;margin-bottom:16px">
+    <b style="font-size:14.5px">📦 作品集启动包已就位(12 个可填模板)</b>
+    <div style="font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-top:10px;line-height:2">
+      portfolio-starter/<br>
+      ├── README.md <span style="color:var(--ink-3)"># 主页:AI产品观3句话+代表作表格(填空即用)</span><br>
+      ├── 01-agent-product/ <span style="color:var(--ink-3)"># README(架构/评测/迭代Δ) + EVALUATION.md(评测报告) + POSTMORTEM.md(3个失败案例模板)</span><br>
+      ├── 02-eval-framework/ <span style="color:var(--ink-3)"># README(rubric设计) + dataset/SAMPLING-PLAN.md(抽样方案) + judge/prompt-template.md(Judge提示词模板,直接可用) + REPORT.md(基准报告)</span><br>
+      ├── 03-product-teardowns/TEARDOWN-TEMPLATE.md <span style="color:var(--ink-3)"># 拆解五要素:Loop图/3断点/归因/方案/判断</span><br>
+      ├── 04-prototypes/README.md <span style="color:var(--ink-3)"># 原型集+5个由浅入深选题</span><br>
+      └── 05-writing/README.md <span style="color:var(--ink-3)"># 5个观点选题方向+文章模板</span>
+    </div>
+    <p style="font-size:13px;color:var(--ink-2);margin-top:10px">所有占位符用【】标出。做完项目把数据填进去,推到 GitHub 个人主页置顶——「考试提交到我的个人 GitHub」的完整路径已铺好。Judge 提示词模板含成对比较防位置偏差、基准插入题防漂移,拿来就能跑。</p>
+  </div>
+  <ul class="principles" id="portfolio-principles"></ul>
+</section>
+
+<!-- ============ ⑨ 简历重点 ============ -->
+<section id="sec-focus">
+  <h2 class="sec"><span class="no">09</span>简历重点 · 分公司策略</h2>
+  <p class="sec-sub">同一段经历,8 家公司要用不同侧面讲</p>
+  <div style="margin-bottom:16px" id="focus-head"></div>
+  <div class="focus-grid" id="focus-grid"></div>
+</section>
+
+<!-- ============ ⑩ 简历校准器 ============ -->
+<section id="sec-calibrator">
+  <h2 class="sec"><span class="no">10</span>简历校准器 · 上传即测</h2>
+  <p class="sec-sub">粘贴简历全文 → 按 11 项能力矩阵逐条检测 → 有证据 / 仅提及 / 缺失 三档判定 + 补强建议。改完再贴,反复校准。</p>
+  <div class="cal-wrap">
+    <div class="cal-input">
+      <h3>📥 你的简历</h3>
+      <textarea id="resume-input" placeholder="把简历全文粘贴到这里(纯文本即可,PDF 复制出来的也行)…
+
+支持上传文件:点击下方「上传 .txt / .md」。
+
+检测逻辑:
+· 有证据 = 关键词命中 且 上下文里有数字/工具/交付物等实证信号
+· 仅提及 = 命中关键词但没有实证(如只写「了解 RAG」)
+· 缺失   = 完全没出现相关表述"></textarea>
+      <div class="cal-actions">
+        <button class="btn" onclick="calibrate()">🔍 开始校准</button>
+        <button class="btn ghost" onclick="loadSample()">试试示例简历</button>
+        <label class="btn ghost" style="margin:0">📄 上传 .txt / .md
+          <input type="file" id="resume-file" accept=".txt,.md,.markdown" style="display:none" onchange="loadFile(this)">
+        </label>
+        <button class="btn ghost" onclick="document.getElementById('resume-input').value='';document.getElementById('cal-result').innerHTML='';window.localStorage.removeItem('aiPmResume')">清空</button>
+      </div>
+      <p class="cal-note">🔒 纯本地检测:简历文本不离开你的浏览器(localStorage 仅存草稿,清空即删)。判为「缺失」不代表你不具备——只代表简历上没写出来,面试官和你自己都看不见。</p>
+    </div>
+    <div class="cal-output" id="cal-result">
+      <div class="empty-state">校准报告会出现在这里<br><br>建议第一次先用「试试示例简历」感受一下判定标准,<br>再贴自己的。</div>
+    </div>
+  </div>
+</section>
+
+<div class="disclaimer">
+  ⚠️ 数据说明:Kimi/OpenAI/Anthropic/字节/腾讯/阿里/DeepSeek 的 JD 均为 2026-10-13 从官方招聘渠道真实抓取;Manus 官网对本机区域封锁,采用公开二手信息并已标注——投递前请通过 manus.im 官方渠道核实(Manus 官方声明从未授权第三方付费内推)。本页不构成任何录用承诺,招聘信息以各家官网实时为准。
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    AI PM Career Lab · 数据抓取 2026-10-13 · 持续更新<br>
+    把简历发给我 → 我按你的强弱项逐条校准这份清单 → 出定制面试题和参考答案
+  </div>
+</footer>
+
+<script src="jd-data.js"></script>
+<script>
+// ===== 渲染 =====
+const $ = (s) => document.querySelector(s);
+let activeCompany = null;
+
+function renderCompanies() {
+  const grid = $('#company-grid');
+  grid.innerHTML = '';
+  let total = 0;
+  COMPANIES.forEach(c => {
+    total += c.jobs.length;
+    const card = document.createElement('div');
+    card.className = 'company-card';
+    card.style.setProperty('--c-accent', c.accent);
+    card.innerHTML = `
+      <div class="bar"></div>
+      <h3>${c.name}</h3>
+      <div class="cnt">${c.jobs.length} 个在招产品岗</div>
+      <div class="src">${c.source}</div>`;
+    card.onclick = () => selectCompany(c.id);
+    grid.appendChild(card);
+  });
+  $('#st-jobs').textContent = total;
+}
+
+function selectCompany(id) {
+  activeCompany = id;
+  document.querySelectorAll('.company-card').forEach((el, i) => {
+    el.classList.toggle('active', COMPANIES[i].id === id);
+  });
+  renderJobs(id);
+}
+
+function renderJobs(id) {
+  const c = COMPANIES.find(x => x.id === id);
+  const list = $('#job-list');
+  list.innerHTML = '';
+  c.jobs.forEach((j, idx) => {
+    const el = document.createElement('div');
+    el.className = 'job';
+    let body = '';
+    if (j.duties) {
+      body += `<h4>岗位职责</h4><ul>${j.duties.map(d=>`<li>${d}</li>`).join('')}</ul>`;
+    }
+    if (j.brief) body += `<h4>岗位概述</h4><ul><li>${j.brief}</li></ul>`;
+    if (j.reqs) body += `<h4>任职要求</h4><ul>${j.reqs.map(r=>`<li>${r}</li>`).join('')}</ul>`;
+    if (j.bonus && j.bonus.length) body += `<h4>加分项</h4><ul>${j.bonus.map(b=>`<li>${b}</li>`).join('')}</ul>`;
+    if (j.salary) body += `<div class="salary" style="margin-top:12px">薪酬参考:${j.salary}</div>`;
+    if (j.note) body += `<div class="note">${j.note}</div>`;
+    el.innerHTML = `
+      <div class="job-head">
+        <span class="chev">▶</span>
+        ${j.urgent ? '<span class="tag-urgent">急聘</span>' : ''}
+        <span class="t">${j.title}</span>
+        <span class="meta">${j.loc} · ${j.type}</span>
+      </div>
+      <div class="job-body" style="--c-accent:${c.accent}">${body}</div>`;
+    el.querySelector('.job-head').onclick = () => el.classList.toggle('open');
+    list.appendChild(el);
+  });
+  // 默认展开第一个
+  const first = list.querySelector('.job');
+  if (first) first.classList.add('open');
+}
+
+function renderMatrix() {
+  const m = $('#matrix');
+  m.innerHTML = CAPABILITY_MATRIX.map(cap => `
+    <div class="cap">
+      <div class="cap-head">
+        <span class="nm">${cap.name}</span>
+        <span class="wt">${cap.weight}</span>
+      </div>
+      <div class="dt">${cap.detail}</div>
+      <div class="ad"><b>简历/面试对策:</b>${cap.advice}</div>
+    </div>`).join('');
+}
+
+function renderResumeChecklist() {
+  const el = $('#resume-checklist');
+  el.innerHTML = RESUME_CHECKLIST.map(g => `
+    <div class="grp">
+      <b>${g.section}</b>
+      <ul>${g.must.map(x=>`<li>${x}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+
+function renderLearnPath() {
+  const el = $('#learn-path');
+  el.innerHTML = LEARNING_PATH.map(s => `
+    <div class="stage">
+      <div class="stage-head">
+        <span class="st">${s.stage}</span>
+        <span class="gl">目标:${s.goal}</span>
+      </div>
+      <table>
+        <tr><th>学什么</th><th>学到什么程度</th><th>推荐资源</th></tr>
+        ${s.items.map(i => `<tr><td>${i.topic}</td><td class="mid">${i.depth}</td><td>${i.res}</td></tr>`).join('')}
+      </table>
+    </div>`).join('');
+}
+
+function renderInterview() {
+  const el = $('#interview');
+  let n = 0;
+  el.innerHTML = INTERVIEW_QUESTIONS.map(cat => `
+    <div class="qcat">
+      <div class="qcat-head">
+        <span class="nm">${cat.cat}</span>
+        <span class="lv ${cat.level==='中频'?'mid':''}">${cat.level}</span>
+      </div>
+      ${cat.qs.map(q => { n++; return `
+      <div class="q">
+        <div class="qq"><span class="qn">Q${n}</span>${q.q}</div>
+        <div class="key">${q.key}</div>
+      </div>`;}).join('')}
+    </div>`).join('');
+}
+
+function renderExams() {
+  const el = $('#exams');
+  el.innerHTML = WRITTEN_TESTS.map(e => `
+    <div class="exam">
+      <h3>${e.name}</h3>
+      <p style="font-size:13.5px;color:var(--ink-3)">${e.scenario}</p>
+      <ol>${e.tasks.map(t=>`<li>${t}</li>`).join('')}</ol>
+      <div class="sc"><b>评分标准:</b>${e.scoring}</div>
+    </div>`).join('');
+}
+
+function renderAnswers() {
+  const el = $('#answers');
+  let n = 0, idx = 0;
+  let html = '';
+  INTERVIEW_QUESTIONS.forEach(cat => {
+    cat.qs.forEach(q => {
+      n++;
+      html += `
+      <div class="job">
+        <div class="job-head">
+          <span class="chev">▶</span>
+          <span class="t">Q${n} · ${q.q}</span>
+          <span class="meta">${cat.cat}</span>
+        </div>
+        <div class="job-body"><div class="ans-body">${ANSWERS[idx] || ''}</div></div>
+      </div>`;
+      idx++;
+    });
+  });
+  el.innerHTML = html;
+  el.querySelectorAll('.job-head').forEach(h => h.onclick = () => h.parentElement.classList.toggle('open'));
+}
+
+function renderGuides() {
+  const el = $('#guides');
+  el.innerHTML = PROJECT_GUIDES.map(g => `
+    <div class="guide">
+      <h3>${g.name}</h3>
+      <div class="gtime">⏱ ${g.time}</div>
+      <div class="gwhy"><b>为什么做这个:</b>${g.why}</div>
+      <table>
+        <tr><th>步骤</th><th>怎么做</th></tr>
+        ${g.steps.map(s => `<tr><td class="st">${s.t}</td><td>${s.d}</td></tr>`).join('')}
+      </table>
+      <div class="rl"><b>${g.resumeLine}</b></div>
+    </div>`).join('');
+}
+
+function renderResources() {
+  const el = $('#resources');
+  el.innerHTML = RESOURCES.map(g => `
+    <div class="res-grp">
+      <h3>${g.type}</h3>
+      ${g.items.map(i => `
+        <a class="res" href="${i.url}" target="_blank" rel="noopener">
+          <div class="rn">${i.name}</div>
+          <div class="rw">${i.why}</div>
+          <div class="u">${i.url}</div>
+        </a>`).join('')}
+    </div>`).join('');
+}
+
+function renderPortfolio() {
+  $('#portfolio-principles').innerHTML = PORTFOLIO_STRUCTURE.principles.map(p=>`<li>${p}</li>`).join('');
+}
+
+function renderFocus() {
+  $('#focus-head').innerHTML = RESUME_FOCUS.headline.map(h=>`
+    <div style="background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 16px;font-size:13.5px;margin-bottom:8px">${h}</div>`).join('');
+  $('#focus-grid').innerHTML = Object.entries(RESUME_FOCUS.diffByCompany).map(([k,v])=>{
+    const c = COMPANIES.find(x=>x.id===k);
+    return `<div class="fc" style="--c-accent:${c?c.accent:'#666'}">
+      <b class="co">${c?c.name:k}</b>
+      <p>${v}</p>
+    </div>`;}).join('');
+}
+
+// ===== 导航高亮 =====
+const secs = [...document.querySelectorAll('section')];
+const navLinks = [...document.querySelectorAll('nav a')];
+window.addEventListener('scroll', () => {
+  let cur = 0;
+  secs.forEach((s,i) => { if (s.getBoundingClientRect().top < 120) cur = i; });
+  navLinks.forEach((a,i)=>a.classList.toggle('active', i===cur));
+}, {passive:true});
+
+// ===== 启动 =====
+renderCompanies();
+selectCompany('kimi');
+renderMatrix();
+renderResumeChecklist();
+renderLearnPath();
+renderInterview();
+renderExams();
+renderAnswers();
+renderGuides();
+
+// ===== 简历校准器 =====
+// 检测规则:每项能力 = 触发词(命中才算「有/仅提及」) + 证据信号(有数字/工具/交付物才算「有证据」)
+const CAL_RULES = [
+  {
+    name: 'Agent 深度使用经验',
+    trigger: /claude\s*code|codex|cursor|manus|windsurf|copilot|cline|devin|agent\s*(产品|重度|使用|loop)|ai\s*agent|智能体/i,
+    evidence: /(\d+\s*(次|个|小时|周|天|条))|(每天|日常|长期)|(写(过|了).{0,10}(拆解|分析))|(用.{0,20}(完成|搭建|做出|重构|开发))/i,
+    yesHint: '有实证。面试前把这个案例打磨成 STAR:当时任务→Agent 边界卡在哪→你的 workaround→结果',
+    midHint: '有提及但无实证。补法:写清「用 X 完成了 Y 真实任务,产出 Z」——比如「用 Claude Code 完成数据管道重构,3 天替代原 2 周工作量」',
+    noHint: '缺失。8 家里 7 家的硬门槛。最快的补法:从今天起用 Claude Code/Codex 完成一个真实工作项目,3 周后你就有素材了(见 06++ 项目指南)',
+  },
+  {
+    name: 'Context Engineering / 上下文工程',
+    trigger: /context\s*engineering|上下文(工程|设计|管理|组织)|长记忆|分层记忆|memory(设计|机制)|记忆(机制|设计)|kv.?cache|prompt\s*cache/i,
+    evidence: /(窗口|预算|token|压缩|摘要|分层|检索注入)|(设计(过|了).{0,12}(上下文|记忆))/i,
+    yesHint: '稀缺能力,面试重点展开。准备一个具体设计:窗口怎么分配、超长怎么压缩、什么进检索什么进记忆',
+    midHint: '提及但无设计细节。补一句你做过的分配决策,如「50 轮会话分层记忆:近 5 轮原文+远期摘要+画像常驻」',
+    noHint: '缺失。这是 2026 年 AI PM 的分水岭词。学:Anthropic《Effective Context Engineering for AI Agents》(见 07 板块),然后在项目里真做一次上下文预算设计',
+  },
+  {
+    name: '模型能力边界判断',
+    trigger: /能力边界|模型(边界|局限|能力)|(幻觉|hallucination).{0,12}(设计|兜底|防护|应对)|模型选型|模型(分级|路由)/i,
+    evidence: /(换(了|过)?(模型|方案))|(取舍|权衡|trade.?off)|(边界|局限).{0,20}(案例|实测|踩坑)/i,
+    yesHint: '好。面试必考「这需求用模型还是规则」——准备 2 个真实取舍案例',
+    midHint: '提及但无案例。补:「识别出 X 场景幻觉率高,改为规则+模型混合,误报率 a%→b%」这类句式',
+    noHint: '缺失。8/8 家全考。学法:每周深用一款模型产品,记录 3 个失败时刻和你的判断(这是 DeepSeek「用过、拆过」的底子)',
+  },
+  {
+    name: 'Evaluation / 评测体系',
+    trigger: /评测|评估体系|eval(uation)?s?|llm.?as.?a.?judge|ground.?truth|基准|benchmark|盲评|rubric|评分标准/i,
+    evidence: /(构建|搭建|设计)(过|了)?.{0,15}(评测|评估|测试集|基准)|(标注|抽样|一致率|校准)|(\d+\s*(条|个|case))/i,
+    yesHint: '最强差异化项,放到简历显眼位置。面试展开:抽样怎么定、Judge 怎么防偏差、和人工一致率多少',
+    midHint: '提及但无体系。补:「建了 N 条评测集,设计 X 维 rubric,Judge 与人工一致率 Y%」——启动包 02 有全套模板',
+    noHint: '缺失但最容易补:1-2 周做完启动包项目 2,简历立刻多出最稀缺的一条',
+  },
+  {
+    name: 'Prompt 工程(产品级)',
+    trigger: /prompt(工程|设计|调优)?|提示词/i,
+    evidence: /(结构化|模板|版本|ab|测试).{0,10}(prompt|提示词)|(prompt|提示词).{0,10}(稳定性|可控性|产品化)|调(优|参)/i,
+    yesHint: '注意面试升级考法:不是「会写」而是「把 Prompt 当产品模块设计,量化它对稳定性的影响」',
+    midHint: '提及但停留在「会写」。补:一句「设计的提示词模板使输出合格率从 X%→Y%」',
+    noHint: '轻度缺失。至少准备:结构化模板、失败 case、量化改进的一句话故事',
+  },
+  {
+    name: 'MCP / API / Function Calling',
+    trigger: /\bmcp\b|function.?calling|工具调用|tool\s*call|api(接入|设计|产品)|(开放|开发者)平台/i,
+    evidence: /(接(入|过)|写(过|了)|实现).{0,15}(mcp|api|工具|server)|(工具|schema).{0,8}(设计|定义)/i,
+    yesHint: '加分。面试可能现场让你设计一个工具链(见 Q11),准备 schema 设计的两个细节:描述写「何时不该用」、返回值宁小勿大',
+    midHint: '提及但无动手痕迹。补:亲手接一次(半天工作量),写进简历就是「有实际使用或项目经验」(腾讯 JD 原文)',
+    noHint: '缺失。学:modelcontextprotocol.io 官方 quickstart,半天写一个 server,这是性价比最高的一格',
+  },
+  {
+    name: '数据驱动 / A/B / 指标体系',
+    trigger: /a\/?b\s*test|ab实验|指标体系|漏斗|埋点|留存|转化率|sql|北极星|数据分析|数据驱动|完成率|干预率|幻觉率|成功率|一致率/i,
+    evidence: /(\d+\.?\d*\s*%)|(提升|增长|下降|提高).{0,12}\d+|(设计|搭建).{0,10}(指标|漏斗|实验)|(写|用).{0,6}sql/i,
+    yesHint: '扎实。AI PM 加分方向:把传统指标叙事迁移到 AI 特有指标(任务完成率/人工干预率/单任务成本)',
+    midHint: '提及但无数字。简历铁律:每条经历至少一个数字,没有数字的经历在 AI PM 简历里等于没写',
+    noHint: '传统 PM 基本功,必须补:翻过去的经历,把每个项目补上 1-2 个量化结果',
+  },
+  {
+    name: '0→1 / 独立 Owner 经历',
+    trigger: /0[-→到]1|从零|独立(负责|完成|操盘|带队)|创业|创始人|owner|产品线|端到端/i,
+    evidence: /(上线|发布|launch)|(真实|实际)用户|\d+\s*(用户|万|客户|dau|mau)|(背|负责).{0,8}(指标|kpi|营收)/i,
+    yesHint: 'Kimi 垂直 Owner 岗的核心票。叙事重点:你怎么定义方向、怎么验证、结果如何',
+    midHint: '提及但无结果。补:上线了吗?多少用户/收入?没有大数字就写小而真实的(「上线 3 个月,200 真实用户,周留 30%」)',
+    noHint: '缺失。替代路径:个人项目从 0 做到有真实用户也算(启动包项目 1 就是为此设计)',
+  },
+  {
+    name: 'Vibe Coding / 原型能力',
+    trigger: /vibe\s*coding|ai\s*coding|结对(开发|编程)|(用|借助)\s*ai\s*(开发|写|搭|做)|(原型|prototype).{0,8}(开发|实现|搭建)/i,
+    evidence: /(部署|上线|可运行|demo|github)|\d+\s*(行|个)(代码|文件)/i,
+    yesHint: '2026 硬通货(DeepSeek 明文要求)。作品集里放可运行链接',
+    midHint: '提及但无产物。补:GitHub 链接或 demo GIF——「能跑的东西」比「会用」有力 10 倍',
+    noHint: '缺失。启动包项目 1 或 04 原型集任选一个做出来,2-3 周补齐这一格',
+  },
+  {
+    name: '人机交互范式判断',
+    trigger: /人机(交互|协作)|交互范式|hci|computer.?use|proactive|主动性|用户体验设计|交互设计/i,
+    evidence: /(范(式|畴)|判断|观点|原则).{0,15}(设计|迭代|权衡)|(何时|什么时候).{0,10}(问|确认|接管)/i,
+    yesHint: 'Kimi Work 岗核心。准备「什么时候该问人/自己干完」的判断框架(见 Q2 参考答案)',
+    midHint: '提及但无观点。补:一句你的原则,如「不可逆操作必须人确认,可逆高置信操作自动+通知」',
+    noHint: '写一篇观点文章补上(启动包 05 模板),面试时就是「自己的答案」',
+  },
+  {
+    name: '垂直领域深度',
+    trigger: /(游戏|电商|金融|科研|教育|医疗|法律|内容|视频|风控|客服|办公|搜索|开发者工具|研发效能|智能客服|营销|招聘|旅游|餐饮)(领域|行业|方向|产品|场景|业务)?/i,
+    evidence: /(从业|深耕|\d+\s*年).{0,12}(行业|领域)|(领域|行业).{0,10}(专家|资深|深度)/i,
+    yesHint: '好。投 Kimi 垂直 Owner 岗时把这个领域的理解写透:用户任务清单、现有解决方案、AI 的机会点',
+    midHint: '提及但无深度证明。补:你对这个领域的独特洞察一两句(能列出该领域用户 10 个真实任务才算懂)',
+    noHint: '选一个你有积累的领域,按启动包项目 1 做垂直 Agent——领域+AI 双重稀缺',
+  },
+];
+
+// 通用能力证据信号(数字、工具名、交付物)
+const GENERIC_EVIDENCE = /(\d+\.?\d*\s*(%|万|k|倍|天|周|月|人|条|个))|(上线|发布|交付|产出|落地)/i;
+
+function scoreResume(text) {
+  return CAL_RULES.map(rule => {
+    const trig = rule.trigger.test(text);
+    if (!trig) return { name: rule.name, level: 'no', hint: rule.noHint };
+    const ev = rule.evidence.test(text) || GENERIC_EVIDENCE.test(text);
+    return ev
+      ? { name: rule.name, level: 'yes', hint: rule.yesHint }
+      : { name: rule.name, level: 'mid', hint: rule.midHint };
+  });
+}
+
+function calibrate() {
+  const text = document.getElementById('resume-input').value.trim();
+  const out = document.getElementById('cal-result');
+  if (text.length < 50) {
+    out.innerHTML = '<div class="empty-state">简历内容太短(至少 50 字)。<br>完整粘贴工作经历+项目经历+技能部分。</div>';
+    return;
+  }
+  window.localStorage.setItem('aiPmResume', text);
+  const scores = scoreResume(text);
+  const yes = scores.filter(s=>s.level==='yes').length;
+  const mid = scores.filter(s=>s.level==='mid').length;
+  const no  = scores.filter(s=>s.level==='no').length;
+  const totalScore = Math.round((yes + mid*0.5) / CAL_RULES.length * 100);
+  let verdict, verdictColor;
+  if (totalScore >= 70) { verdict = '简历已具备 AI PM 主流竞争力,重点打磨「有证据」项的叙事深度'; verdictColor = 'var(--green)'; }
+  else if (totalScore >= 40) { verdict = '有基础但证据不足——按下方黄灯项逐条补数字和案例,提分最快'; verdictColor = 'var(--amber)'; }
+  else { verdict = '与 8 家 JD 的要求有明显差距——优先补红灯项,建议直接做 06++ 的项目 1 和 2'; verdictColor = 'var(--red)'; }
+  const order = { yes: 0, mid: 1, no: 2 };
+  const sorted = [...scores].sort((a,b)=>order[a.level]-order[b.level]);
+  out.innerHTML = `
+    <h3>📊 校准报告</h3>
+    <div class="cal-summary">
+      <div class="pill">综合匹配度 <b>${totalScore}%</b></div>
+      <div class="pill"><b style="color:var(--green)">${yes}</b> 有证据</div>
+      <div class="pill"><b style="color:var(--amber)">${mid}</b> 仅提及</div>
+      <div class="pill"><b style="color:var(--red)">${no}</b> 缺失</div>
+    </div>
+    <div style="font-size:13.5px;color:${verdictColor};font-weight:600;margin-bottom:14px">${verdict}</div>
+    ${sorted.map(s => `
+      <div class="score-row">
+        <span class="score-badge sb-${s.level}">${s.level==='yes'?'✓ 有证据':s.level==='mid'?'△ 仅提及':'✗ 缺失'}</span>
+        <div>
+          <div class="nm">${s.name}</div>
+          <div class="hint">${s.hint}</div>
+        </div>
+      </div>`).join('')}
+    <div class="gaps-box">💡 这是词面检测(快但粗),拿不准的一律按更严的档算。把这份报告连同简历发给我,我会人工逐条精校——词面「仅提及」的项里,常常藏着你其实做过但没写好的经历。</div>
+    <div class="cal-actions" style="margin-top:14px">
+      <button class="btn ghost" onclick="navigator.clipboard.writeText(document.querySelector('#cal-result').innerText).then(()=>this.textContent='已复制✓')">复制报告文本</button>
+    </div>`;
+}
+
+function loadFile(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('resume-input').value = e.target.result;
+    calibrate();
+  };
+  reader.readAsText(f);
+}
+
+function loadSample() {
+  document.getElementById('resume-input').value = `张三 | AI 产品经理 | 5 年经验
+
+【技能】
+熟悉大模型应用:RAG、Agent、Function Calling、Prompt 工程
+会用 SQL、Python 做数据分析,A/B 实验设计
+了解 Claude、ChatGPT 等产品
+
+【工作经历】
+XX 公司 · 高级产品经理(2023-2026)
+- 负责智能客服产品 0-1 搭建,从需求分析到上线
+- 设计知识库问答流程,接入大模型 API
+- 跟进上线后迭代,优化用户满意度
+
+YY 公司 · 产品经理(2021-2023)
+- 负责内容社区 App 的用户增长
+- 设计新手引导改版,提升次日留存`;
+  calibrate();
+}
+
+// 恢复草稿
+const saved = window.localStorage.getItem('aiPmResume');
+if (saved) document.getElementById('resume-input').value = saved;
+renderResources();
+renderPortfolio();
+renderFocus();
+</script>
+</body>
+</html>
